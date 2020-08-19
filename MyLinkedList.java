@@ -13,43 +13,43 @@ public class MyLinkedList {
         System.out.println(" " + (o1 == o2));
 
         SingleLinkedList<Integer> list = new SingleLinkedList<>();
-        System.out.println("===============" + list.size() +" - "+ list.getLast());
+        System.out.println("===============" + list.size() + " - " + list.getLast());
         list.printElements();
-        System.out.println("===============" + list.size() +" - "+ list.getLast());
+        System.out.println("===============" + list.size() + " - " + list.getLast());
         list.add(0, 10);
         list.printElements();
-        System.out.println("===============" + list.size() +" - "+ list.getLast());
+        System.out.println("===============" + list.size() + " - " + list.getLast());
         list.add(0, 15);
         list.printElements();
-        System.out.println("===============" + list.size() +" - "+ list.getLast());
+        System.out.println("===============" + list.size() + " - " + list.getLast());
         list.add(0, 5);
         list.printElements();
-        System.out.println("===============" + list.size() +" - "+ list.getLast());
+        System.out.println("===============" + list.size() + " - " + list.getLast());
         list.add(3, 23);
         list.printElements();
-        System.out.println("===============" + list.size() +" <--> "+ list.getLast());
+        System.out.println("===============" + list.size() + " <--> " + list.getLast());
 //        Load data into LinkedList
         for (int i = 5; i < 10; i++) {
             list.add(i);
         }
 //        Print the data
         list.printElements();
-        System.out.println("===============" + list.size() +" <-> "+ list.getLast());
+        System.out.println("===============" + list.size() + " <-> " + list.getLast());
         list.addFirst(200);
         list.printElements();
-        System.out.println("===============" + list.size() +" <-> "+ list.getLast());
+        System.out.println("===============" + list.size() + " <-> " + list.getLast());
         list.addLast(-50);
         list.printElements();
-        System.out.println("===============" + list.size() +" <--> "+ list.getLast());
+        System.out.println("===============" + list.size() + " <--> " + list.getLast());
 //Check if linked list has an element
         System.out.println("List has 50 <==> " + list.contains(50));
         System.out.println("List has 5 <==> " + list.contains(5));
         list.remove(0);
         list.printElements();
-        System.out.println("===============" + list.size() +" <-> "+ list.getLast());
+        System.out.println("===============" + list.size() + " <-> " + list.getLast());
         list.removeLast();
         list.printElements();
-        System.out.println("===============" + list.size() +" <-> "+ list.getLast());
+        System.out.println("===============" + list.size() + " <-> " + list.getLast());
     }
 }
 
@@ -103,6 +103,9 @@ class SingleLinkedList<T> {
             head = n;
             tail = tail == null ? head : tail;
             n.next = t;
+        } else if (index == size) {
+            tail.next = n;
+            tail = tail.next;
         } else {
             int i = 0;
             Node firstPart = head;
@@ -152,7 +155,7 @@ class SingleLinkedList<T> {
     }
 
     public void removeLast() {
-        remove(size-1);
+        remove(size - 1);
     }
 
     public void addFirst(T ele) {
