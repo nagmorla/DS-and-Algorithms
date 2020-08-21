@@ -13,6 +13,7 @@ public class MyLinkedList {
         System.out.println(" " + (o1 == o2));
 
         SingleLinkedList<Integer> list = new SingleLinkedList<>();
+        list.remove(0);
         System.out.println("===============" + list.size() + " - " + list.getLast());
         list.printElements();
         System.out.println("===============" + list.size() + " - " + list.getLast());
@@ -64,6 +65,11 @@ class SingleLinkedList<T> {
         tail = null;
     }
 
+    /**
+     * Add element to tail of the list;
+     *
+     * @param t
+     */
     public void add(T t) {
 //        Node<T> n = new Node(t);
 //        if (head == null) {
@@ -93,6 +99,12 @@ class SingleLinkedList<T> {
         System.out.println("");
     }
 
+    /**
+     * Adds element at given index.
+     *
+     * @param index
+     * @param element
+     */
     public void add(int index, T element) {
         if (index < 0 || index > size) {
             throw new ArrayIndexOutOfBoundsException("LinkedList size::" + size + ", Given index :: " + index);
@@ -101,9 +113,10 @@ class SingleLinkedList<T> {
         if (index == 0) {
             Node t = head;
             head = n;
-            tail = tail == null ? head : tail;
             n.next = t;
+            tail = tail == null ? head : tail;
         } else if (index == size) {
+//            System.out.println("index == size, adding at tail");
             tail.next = n;
             tail = tail.next;
         } else {
@@ -123,6 +136,11 @@ class SingleLinkedList<T> {
         size++;
     }
 
+    /**
+     * Retrieves but doesn't removes tailing element.
+     *
+     * @return
+     */
     public T getLast() {
         if (tail == null) {
             return null;
@@ -130,56 +148,112 @@ class SingleLinkedList<T> {
         return tail.data;
     }
 
-    public void remove(int index) {
+    /**
+     * Retrieves but doesn't removes head element.
+     *
+     * @return
+     */
+    public T getFirst() {
+        if (head == null) {
+            return null;
+        }
+        return head.data;
+    }
+
+    /**
+     * Deletes element in the list at given position.
+     *
+     * @param index
+     */
+    public T remove(int index) {
         if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException("LinkedList size::" + size + ", Given index :: " + index);
         }
+        T t;
         if (index == 0) {
+            t = head.data;
             head = head.next;
             tail = head == null ? null : tail;
         } else {
             int i = 0;
-            Node elem = head;
-            Node prev = head;
+            Node<T> elem = head;
+            Node<T> prev = head;
             while (i < index) {
                 prev = elem;
                 elem = elem.next;
                 i++;
             }
             prev.next = elem.next;
+            t = elem.data;
             if (elem == tail) {
                 tail = prev;
             }
         }
         size--;
+        return t;
     }
 
+    /**
+     * Removes tailing element.
+     */
     public void removeLast() {
         remove(size - 1);
     }
 
+    /**
+     * Adds element to head of the element.
+     *
+     * @param ele
+     */
     public void addFirst(T ele) {
         add(0, ele);
     }
 
+    /**
+     * Adds element to tail in the list.
+     *
+     * @param ele
+     */
     public void addLast(T ele) {
         add(size, ele);
     }
 
+    /**
+     * Retrieves and removes head element.
+     *
+     * @return
+     */
     public T poll() {
         if (head == null) {
             return null;
         }
-        T t = head.data;
-        head = head.next;
-        return t;
+//        T t = head.data;
+//        head = head.next;
+//        size--;
+//        if (head == null) {
+//            tail = null;
+//        }
+//        return t;
+        return remove(0);
     }
 
+    /**
+     * Retrieves and removes head element.
+     *
+     * @return
+     */
     public T pop() {
         if (head == null) {
             return null;
         }
-        return head.data;
+//        T t = head.data;
+//        head = head.next;
+//        if (head == null) {
+//            tail = null;
+//        }
+//        size--;
+//        return t;
+        return remove(0);
     }
 
     public boolean contains(T v) {
@@ -197,6 +271,11 @@ class SingleLinkedList<T> {
         return false;
     }
 
+    /**
+     * Internal data container to hold each element(node) data.
+     *
+     * @param <T>
+     */
     private class Node<T> {
 
         private T data;

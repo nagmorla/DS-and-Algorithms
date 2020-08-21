@@ -1,8 +1,7 @@
 package dsalg;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Vector;
 
 /**
  *
@@ -12,7 +11,9 @@ import java.util.Map;
 public class StackImpl {
 
     public static void main(String[] args) {
-//        Stack st = new Stack();
+        int val = Integer.MAX_VALUE;
+//        Vector v;
+        System.out.println("" + (val << 2));
 //        System.out.println("" + (1 >> 2));
 //        System.out.println("" + (1 >> 1));
 //        System.out.println("" + (4 >> 1));
@@ -25,7 +26,7 @@ public class StackImpl {
 //        HashMap<Character, Character> charMap = new HashMap<>();
 //        charMap.put('{', '}');
 //        charMap.containsValue('}');
-        MyStack<Integer> st = new MyStack<>();
+        MyStackV1<Integer> st = new MyStackV1<>();
         System.out.println("Peeked :: " + st.peek());
         System.out.println("Poped :: " + st.pop());
         st.push(2);
@@ -54,16 +55,16 @@ public class StackImpl {
     }
 }
 
-class MyStack<T> {
+class MyStackV1<T> {
 
     private Object[] elements;
     private int count;
 
-    public MyStack(int size) {
+    public MyStackV1(int size) {
         elements = new Object[size];
     }
 
-    public MyStack() {
+    public MyStackV1() {
         elements = new Object[5];
     }
 
@@ -86,6 +87,15 @@ class MyStack<T> {
         T t = (T) elements[--count];
         elements[count] = null;//De-reference the old element.
         return t;
+    }
+
+    public boolean contains(T t) {
+        for (int i = 0; i < count; i++) {
+            if (t.equals(elements[i])) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
