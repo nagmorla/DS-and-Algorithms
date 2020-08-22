@@ -20,11 +20,20 @@ public class QueueWithLinkedList<T> {
     }
 
     /**
-     * Retrieves element from top of the stack but do not remove.
+     * Retrieves & removes element from front of the queue.
      *
-     * @return top element from stack.
+     * @return top element from queue.
      */
     public synchronized T pop() {
+        return list.pop();
+    }
+
+    /**
+     * Retrieves & removes element from front of the queue.
+     *
+     * @return top element from queue.
+     */
+    public synchronized T dequeue() {
         return list.pop();
     }
 
@@ -39,20 +48,29 @@ public class QueueWithLinkedList<T> {
     }
 
     /**
-     * Retrieves element from top of the stack but do not remove.
+     * Retrieves element from front of the queue but do not remove.
      *
-     * @return top element from stack.
+     * @return top element from queue.
      */
     public T peek() {
         return list.getFirst();
     }
 
     /**
-     * Add element to tail of queue.
+     * Add element to tail/rear of queue.
      *
      * @param t
      */
     synchronized public void add(T t) {
+        list.add(t);
+    }
+
+    /**
+     * Add element to tail/rear of queue.
+     *
+     * @param t
+     */
+    synchronized public void enqueue(T t) {
         list.add(t);
     }
 
