@@ -12,6 +12,22 @@ package dsalg;
  */
 public class StackWithArray<T> {
 
+    public static void main(String[] args) throws Exception {
+        StackWithArray<Character> stackWithArray = new StackWithArray<>();
+        stackWithArray.push('A');
+        stackWithArray.push('B');
+        stackWithArray.push('V');
+        stackWithArray.push('D');
+        stackWithArray.printElements();
+        stackWithArray.deleteTop(2);
+        stackWithArray.printElements();
+        stackWithArray.push(new Character[]{'E', 'R', 'O'}, true);
+        stackWithArray.printElements();
+        stackWithArray.push(new Character[]{'S', 'K', 'N'}, false);
+        stackWithArray.printElements();
+        System.out.println("-->" + stackWithArray.getElementFromBottom(8));
+        System.out.println("-->" + stackWithArray.getElementFromTop(8));
+    }
     private Object[] elements;
     private int count;
 
@@ -79,6 +95,56 @@ public class StackWithArray<T> {
     synchronized public void push(T t) {
         ensureCapacity();
         elements[count++] = t;
+    }
+
+    public Object[] getElements() {
+        Object[] temp = new Object[count];
+        System.arraycopy(elements, 0, temp, 0, count);
+        return temp;
+    }
+
+    synchronized public void push(T[] ele, boolean zeroFirst) {
+        if (zeroFirst) {
+            for (int i = 0; i < ele.length; i++) {
+                T t = ele[i];
+                push(t);
+            }
+        } else {
+            for (int i = ele.length - 1; i >= 0; i--) {
+                T t = ele[i];
+                push(t);
+            }
+        }
+    }
+
+    public synchronized void deleteTop(int numElements) {
+        if (count == 0) {
+            return;
+        }
+        while (numElements > 0) {
+            elements[--count] = null;
+            numElements--;
+        }
+    }
+
+    public T getElementFromTop(int positionFromTop) throws Exception {
+        if (positionFromTop == 0) {
+            return null;
+        }
+        if (positionFromTop > count) {
+            throw new Exception("Requested for " + positionFromTop + " element from top but stack size is " + count);
+        }
+        return (T) elements[count - positionFromTop];
+    }
+
+    public T getElementFromBottom(int positionFromBottom) throws Exception {
+        if (positionFromBottom == 0) {
+            return null;
+        }
+        if (positionFromBottom > count) {
+            throw new Exception("Requested for " + positionFromBottom + " element from bottom but stack size is " + count);
+        }
+        return (T) elements[positionFromBottom - 1];
     }
 
     /**

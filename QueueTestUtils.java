@@ -1,5 +1,8 @@
 package dsalg;
 
+import java.util.PriorityQueue;
+import java.util.concurrent.PriorityBlockingQueue;
+
 /**
  *
  * @author nmorla

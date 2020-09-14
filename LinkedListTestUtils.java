@@ -1,5 +1,7 @@
 package dsalg;
 
+import java.util.HashMap;
+
 /**
  *
  * @author nmorla

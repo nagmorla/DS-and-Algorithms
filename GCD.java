@@ -6,11 +6,14 @@ package dsalg;
  * @since Aug 22, 2020
  */
 public class GCD {
+
     public static void main(String[] args) {
-        System.out.println("---> "+getGcd(108, 54));
-        System.out.println("---> "+getGcd(108, 45, 216));
+//        Integer[] n = new Integer[2];
+//        System.out.println("" + n[0] + " -- " + n[1]);
+        System.out.println("---> " + getGcd(108, 54));
+        System.out.println("---> " + getGcd(108, 45, 216));
     }
-    
+
     static int getGcd(int a, int b) {
         if (a == b) {
             return a;
@@ -24,8 +27,7 @@ public class GCD {
             return getGcd(a - b, a);
         }
     }
-    
-    
+
     static int getGcd(int a, int b, int c) {
         return getGcd(a, getGcd(b, c));
     }
